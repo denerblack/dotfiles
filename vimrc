@@ -32,12 +32,19 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'ecomba/vim-ruby-refactoring'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'bling/vim-airline'
+"Bundle 'vim-scripts/Gist.vim'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
 Bundle "honza/vim-snippets"
 Bundle "bonsaiben/bootstrap-snippets"
+Bundle "benmills/vimux"
+Bundle "Lokaltog/vim-easymotion"
+Bundle "terryma/vim-multiple-cursors"
+Bundle "tmhedberg/matchit"
 
 
 let mapleader = "\\"
@@ -73,10 +80,25 @@ let g:html5_event_handler_attributes_complete=0
 
 "let g:ctrlp_custom_ignore = 'vendor'
 
+
 map <c-b> :CtrlPBuffer<cr>
 map <leader>m :Rmodel<cr>
 map <leader>c :Rcontroller<cr>
 map <leader>v :Rview<cr>
+
+nmap s <Plug>(easymotion-s2)
+nmap t <Plug>(easymotion-t2)
+map  / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+map  n <Plug>(easymotion-next)
+map  N <Plug>(easymotion-prev)
+
+let g:multi_cursor_use_default_mapping=0
+
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
 
 
 :nnoremap <leader>rap  :RAddParameter<cr>
