@@ -45,6 +45,8 @@ Bundle "benmills/vimux"
 Bundle "Lokaltog/vim-easymotion"
 Bundle "terryma/vim-multiple-cursors"
 Bundle "tmhedberg/matchit"
+Bundle "tpope/vim-surround"
+Bundle "nelstrom/vim-visual-star-search"
 
 
 let mapleader = "\\"
@@ -93,12 +95,17 @@ omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
 
+map <F7>  :call g:RubyDebugger.step()<CR>
+map <F5>  :call g:RubyDebugger.next()<CR>
+map <F8>  :call g:RubyDebugger.continue()<CR>
+
 let g:multi_cursor_use_default_mapping=0
 
 let g:multi_cursor_next_key='<C-n>'
 let g:multi_cursor_prev_key='<C-p>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
+let g:ruby_debugger_progname = 'mvim'
 
 
 :nnoremap <leader>rap  :RAddParameter<cr>
