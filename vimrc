@@ -9,18 +9,18 @@ highlight LineNr ctermfg=237  ctermbg=234
 highlight Pmenu ctermbg=234 guibg=black ctermfg=237
 highlight PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 
-"colorscheme solarized
-
-"call pathogen#infect()
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
+set expandtab
 
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
 Bundle 'gmarik/vundle'
-"Bundle 'Valloric/YouCompleteMe'
 Bundle 'vim-scripts/L9'
 Bundle 'kien/ctrlp.vim'
-"Bundle 'scrooloose/nerdtree'
 Bundle 'majutsushi/tagbar'
 Bundle 'tpope/vim-bundler'
 Bundle 'tpope/vim-tbone'
@@ -32,10 +32,8 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'ecomba/vim-ruby-refactoring'
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Bundle 'bling/vim-airline'
-"Bundle 'vim-scripts/Gist.vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
-
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 Bundle "garbas/vim-snipmate"
@@ -47,6 +45,8 @@ Bundle "terryma/vim-multiple-cursors"
 Bundle "tmhedberg/matchit"
 Bundle "tpope/vim-surround"
 Bundle "nelstrom/vim-visual-star-search"
+Bundle "scrooloose/nerdtree"
+Bundle "ngmy/vim-rubocop"
 
 
 let mapleader = "\\"
@@ -67,17 +67,18 @@ autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby,eruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+"autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 set laststatus=2
 set noshowmode
+set backspace=2
 let g:airline_theme='bubblegum'
 let g:html5_event_handler_attributes_complete=0
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
 
-"try
-"	source ~/.vim/bundle/snipmate-snippets/support_functions.vim
 "endtry
 
 "let g:ctrlp_custom_ignore = 'vendor'
@@ -94,10 +95,15 @@ map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
-
+map <leader>n :NERDTreeToggle<cr>
 map <F7>  :call g:RubyDebugger.step()<CR>
 map <F5>  :call g:RubyDebugger.next()<CR>
 map <F8>  :call g:RubyDebugger.continue()<CR>
+
+map <Left> <Nop>
+map <Right> <Nop>
+map <Up> <Nop>
+map <Down> <Nop>
 
 let g:multi_cursor_use_default_mapping=0
 
