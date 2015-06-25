@@ -47,6 +47,8 @@ Bundle "tpope/vim-surround"
 Bundle "nelstrom/vim-visual-star-search"
 Bundle "scrooloose/nerdtree"
 Bundle "ngmy/vim-rubocop"
+Bundle "tpope/vim-jdaddy"
+Bundle "airblade/vim-gitgutter"
 
 
 let mapleader = "\\"
