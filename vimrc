@@ -30,7 +30,7 @@ Bundle 'vim-ruby/vim-ruby'
 Bundle 'othree/vim-autocomplpop'
 Bundle 'tpope/vim-fugitive'
 Bundle 'ecomba/vim-ruby-refactoring'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim'}
 Bundle 'bling/vim-airline'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
@@ -49,13 +49,15 @@ Bundle "scrooloose/nerdtree"
 Bundle "ngmy/vim-rubocop"
 Bundle "tpope/vim-jdaddy"
 Bundle "airblade/vim-gitgutter"
+Bundle "tmux-plugins/vim-tmux"
 
 
 let mapleader = "\\"
 let g:ctrlp_map = '<c-p>'
 
-
-set guifont=ProggyCleanTT\ 12
+"set guifont=ProggyCleanTT\ 12
+"set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h20 "ProggyCleanTT\ 12
+set guifont=Monaco\ for\ Powerline:h12
 
 syntax on
 
@@ -76,7 +78,8 @@ autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 set laststatus=2
 set noshowmode
 set backspace=2
-let g:airline_theme='bubblegum'
+let g:airline_theme='ubaryd'
+let g:airline#extensions#tabline#enabled = 1
 let g:html5_event_handler_attributes_complete=0
 let g:vimrubocop_keymap = 0
 nmap <Leader>r :RuboCop<CR>
@@ -139,3 +142,29 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'y'    : ['%R', '%a', '%Y'],
+      \'z'    : '#H'}
+set rtp+=/Users/dener_black/powerline/powerline/bindings/vim
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+let g:airline_powerline_fonts = 1
+"let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '«'
+"let g:airline_right_sep = '◀'
+"let g:airline_symbols.linenr = '␊'
+"let g:airline_symbols.linenr = '␤'
+"let g:airline_symbols.linenr = '¶'
+"let g:airline_symbols.branch = '⎇'
+"let g:airline_symbols.paste = 'ρ'
+"let g:airline_symbols.paste = 'Þ'
+"let g:airline_symbols.paste = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
