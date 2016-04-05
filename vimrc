@@ -4,6 +4,7 @@ set fileencoding=utf-8
 set number
 
 set t_Co=256
+set laststatus=2
 
 highlight LineNr ctermfg=237  ctermbg=234
 highlight Pmenu ctermbg=234 guibg=black ctermfg=237
@@ -50,6 +51,7 @@ Bundle "ngmy/vim-rubocop"
 Bundle "tpope/vim-jdaddy"
 Bundle "airblade/vim-gitgutter"
 Bundle "tmux-plugins/vim-tmux"
+Bundle 'vim-airline/vim-airline-themes'
 
 
 let mapleader = "\\"
