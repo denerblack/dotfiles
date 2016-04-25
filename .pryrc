@@ -1,17 +1,18 @@
-if defined?(Rails)
-	begin
-		require "rails/console/app"
-        	require "rails/console/helpers"
-        rescue LoadError => e
-		require "console_app"
-	        require "console_with_helpers"
-        end
-end
+# We do this here as well in case pry was not started through IRB,
+# but for example from rails console with pry being in the Gemfile
+$LOAD_PATH.push(*Dir["#{ENV['HOME']}/.prygems/gems/*/lib"]).uniq!
 
-begin
-	  require "awesome_print"
-      AwesomePrint.pry!
-	    #Pry.config.print = proc {|output, value| Pry::Helpers::BaseHelpers.stagger_output("=> #{value.ai}", output)}
-rescue LoadError => err
-	   warn "=> Unable to load awesome_print"
-end
+# Further Pry configuration
+
+# vim FTW
+Pry.config.editor = "mvim --nofork"
+
+# My pry is polite
+Pry.hooks = { :after_session => proc { puts "bye-bye" } }
+
+# Prompt with ruby version
+Pry.prompt = [
+  proc { |obj, nest_level| "#{RUBY_ENGINE}-#{RUBY_VERSION} (#{obj})#{":#{nest_level}" if nest_level > 0}> " },
+  proc { |obj, nest_level| "#{RUBY_ENGINE}-#{RUBY_VERSION} (#{obj})#{":#{nest_level}" if nest_level > 0}* " }
+]
+

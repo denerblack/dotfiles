@@ -6,7 +6,9 @@ set number
 set t_Co=256
 set laststatus=2
 
-highlight LineNr ctermfg=237  ctermbg=234
+highlight LineNr ctermfg=240
+"ctermfg=237
+"ctermbg=234
 highlight Pmenu ctermbg=234 guibg=black ctermfg=237
 highlight PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 
@@ -57,6 +59,9 @@ Bundle 'vim-airline/vim-airline-themes'
 let mapleader = "\\"
 let g:ctrlp_map = '<c-p>'
 
+set wildignore+=./log/**
+set wildignore+=./spec/reports/**
+set wildignore+=./coverage/**
 "set guifont=ProggyCleanTT\ 12
 "set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h20 "ProggyCleanTT\ 12
 set guifont=Monaco\ for\ Powerline:h12
@@ -171,3 +176,13 @@ let g:airline_left_sep = '▶'
 "let g:airline_symbols.paste = '∥'
 "let g:airline_symbols.whitespace = 'Ξ'
 Bundle 'wakatime/vim-wakatime'
+
+"let g:ctrlp_buffer_func = { 'enter': 'BrightHighlightOn', 'exit':  'BrightHighlightOff', }
+
+"function BrightHighlightOn()
+ " hi CursorLine guibg=darkred
+"endfunction
+
+"function BrightHighlightOff()
+"  hi CursorLine guibg=#191919
+"endfunction
