@@ -30,7 +30,9 @@ Bundle 'tpope/vim-tbone'
 Bundle 'tpope/vim-rails'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-ruby/vim-ruby'
-Bundle 'othree/vim-autocomplpop'
+"Bundle 'othree/vim-autocomplpop'
+"Bundle 'Valloric/YouCompleteMe'
+"Bundle 'Shougo/neocomplete.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'ecomba/vim-ruby-refactoring'
 Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim'}
@@ -54,14 +56,14 @@ Bundle "tpope/vim-jdaddy"
 Bundle "airblade/vim-gitgutter"
 Bundle "tmux-plugins/vim-tmux"
 Bundle 'vim-airline/vim-airline-themes'
+Bundle 'wakatime/vim-wakatime'
+Bundle 'junegunn/vim-easy-align'
 
 
 let mapleader = "\\"
 let g:ctrlp_map = '<c-p>'
 
-set wildignore+=./log/**
-set wildignore+=./spec/reports/**
-set wildignore+=./coverage/**
+set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/converage/*,*/doc/*,*/.DS_Store,*/vendor
 "set guifont=ProggyCleanTT\ 12
 "set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h20 "ProggyCleanTT\ 12
 set guifont=Monaco\ for\ Powerline:h12
@@ -90,6 +92,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:html5_event_handler_attributes_complete=0
 let g:vimrubocop_keymap = 0
 nmap <Leader>r :RuboCop<CR>
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 "endtry
 
@@ -136,6 +141,12 @@ let g:ruby_debugger_progname = 'mvim'
 :vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 :vnoremap <leader>rem  :RExtractMethod<cr>
 
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+"
+" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " Strip trailing whitespace
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
@@ -175,7 +186,6 @@ let g:airline_left_sep = '▶'
 "let g:airline_symbols.paste = 'Þ'
 "let g:airline_symbols.paste = '∥'
 "let g:airline_symbols.whitespace = 'Ξ'
-Bundle 'wakatime/vim-wakatime'
 
 "let g:ctrlp_buffer_func = { 'enter': 'BrightHighlightOn', 'exit':  'BrightHighlightOff', }
 
@@ -186,3 +196,15 @@ Bundle 'wakatime/vim-wakatime'
 "function BrightHighlightOff()
 "  hi CursorLine guibg=#191919
 "endfunction
+
+" The Silver Searcher
+if executable('ag')
+	" Use ag over grep
+	set grepprg=ag\ --nogroup\ --nocolor
+
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+	" ag is fast enough that CtrlP doesn't need to cache
+	let g:ctrlp_use_caching = 0
+endif
