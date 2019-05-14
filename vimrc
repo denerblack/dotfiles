@@ -2,7 +2,6 @@ set nocompatible
 set encoding=utf-8
 set fileencoding=utf-8
 set number
-
 set t_Co=256
 set laststatus=2
 
@@ -18,7 +17,7 @@ set softtabstop=2
 set expandtab
 
 filetype off
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.config/nvim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
@@ -35,8 +34,10 @@ Bundle 'vim-ruby/vim-ruby'
 "Bundle 'Shougo/neocomplete.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'ecomba/vim-ruby-refactoring'
-Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim'}
+" Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim'}
 Bundle 'bling/vim-airline'
+Bundle 'edkolev/promptline.vim'
+Bundle 'itchyny/lightline.vim'
 Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
@@ -56,12 +57,23 @@ Bundle "tpope/vim-jdaddy"
 Bundle "airblade/vim-gitgutter"
 Bundle "tmux-plugins/vim-tmux"
 Bundle 'vim-airline/vim-airline-themes'
-Bundle 'wakatime/vim-wakatime'
+" Bundle 'wakatime/vim-wakatime'
 Bundle 'junegunn/vim-easy-align'
 
+" Make sure you use single quotes
+function! DoRemote(arg)
+  UpdateRemotePlugins
+endfunction
+Bundle 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
+Bundle 'roxma/nvim-yarp'
+Bundle 'roxma/vim-hug-neovim-rpc'
+Bundle 'fishbullet/deoplete-ruby'
+set clipboard=unnamedplus
 
 let mapleader = "\\"
 let g:ctrlp_map = '<c-p>'
+
+let g:deoplete#enable_at_startup = 1
 
 set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/converage/*,*/doc/*,*/.DS_Store,*/vendor
 "set guifont=ProggyCleanTT\ 12
@@ -173,19 +185,6 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-let g:airline_powerline_fonts = 1
-"let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-"let g:airline_right_sep = '«'
-"let g:airline_right_sep = '◀'
-"let g:airline_symbols.linenr = '␊'
-"let g:airline_symbols.linenr = '␤'
-"let g:airline_symbols.linenr = '¶'
-"let g:airline_symbols.branch = '⎇'
-"let g:airline_symbols.paste = 'ρ'
-"let g:airline_symbols.paste = 'Þ'
-"let g:airline_symbols.paste = '∥'
-"let g:airline_symbols.whitespace = 'Ξ'
 
 "let g:ctrlp_buffer_func = { 'enter': 'BrightHighlightOn', 'exit':  'BrightHighlightOff', }
 
@@ -208,3 +207,24 @@ if executable('ag')
 	" ag is fast enough that CtrlP doesn't need to cache
 	let g:ctrlp_use_caching = 0
 endif
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+"let g:airline#extensions#tabline#left_sep = ' '
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+"let g:airline_left_sep          = '▶'
+"let g:airline_left_alt_sep      = '»'
+"let g:airline_right_sep         = '◀'
+"let g:airline_right_alt_sep     = '«'
+"let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+"let g:airline#extensions#readonly#symbol   = '⊘'
+"let g:airline#extensions#linecolumn#prefix = '¶'
+"let g:airline#extensions#paste#symbol      = 'ρ'
+"let g:airline_symbols.linenr    = '␊'
+"let g:airline_symbols.branch    = '⎇'
+"let g:airline_symbols.paste     = 'ρ'
+"let g:airline_symbols.paste     = 'Þ'
+"let g:airline_symbols.paste     = '∥'
+"let g:airline_symbols.whitespace = 'Ξ'
