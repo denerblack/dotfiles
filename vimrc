@@ -34,7 +34,7 @@ Bundle 'vim-ruby/vim-ruby'
 "Bundle 'Shougo/neocomplete.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'ecomba/vim-ruby-refactoring'
-" Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim'}
+"Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim'}
 Bundle 'bling/vim-airline'
 Bundle 'edkolev/promptline.vim'
 Bundle 'itchyny/lightline.vim'
@@ -69,6 +69,7 @@ Bundle 'roxma/nvim-yarp'
 Bundle 'roxma/vim-hug-neovim-rpc'
 Bundle 'fishbullet/deoplete-ruby'
 Bundle 'ryanoasis/vim-webdevicons'
+Bundle 'numkil/ag.nvim'
 
 
 
@@ -183,7 +184,7 @@ let g:tmuxline_preset = {
       \'cwin' : ['#I', '#W', '#F'],
       \'y'    : ['%R', '%a', '%Y'],
       \'z'    : '#H'}
-set rtp+=/Users/dener_black/powerline/powerline/bindings/vim
+"set rtp+=/usr/local/lib/python3.7/site-packages/powerline/bindings/vim
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -253,3 +254,7 @@ call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', '#151515')
 call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
+
+let g:python2_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:powerline_pycmd = 'py3'
