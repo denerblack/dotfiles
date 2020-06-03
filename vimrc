@@ -29,13 +29,8 @@ Bundle 'tpope/vim-tbone'
 Bundle 'tpope/vim-rails'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'vim-ruby/vim-ruby'
-"Bundle 'othree/vim-autocomplpop'
-"Bundle 'Valloric/YouCompleteMe'
-"Bundle 'Shougo/neocomplete.vim'
 Bundle 'tpope/vim-fugitive'
 Bundle 'ecomba/vim-ruby-refactoring'
-"Bundle 'Lokaltog/powerline' , {'rtp': 'powerline/bindings/vim'}
-Bundle 'bling/vim-airline'
 Bundle 'edkolev/promptline.vim'
 Bundle 'itchyny/lightline.vim'
 Bundle 'mattn/webapi-vim'
@@ -56,6 +51,7 @@ Bundle "ngmy/vim-rubocop"
 Bundle "tpope/vim-jdaddy"
 Bundle "airblade/vim-gitgutter"
 Bundle "tmux-plugins/vim-tmux"
+Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 " Bundle 'wakatime/vim-wakatime'
 Bundle 'junegunn/vim-easy-align'
@@ -70,6 +66,7 @@ Bundle 'roxma/vim-hug-neovim-rpc'
 Bundle 'fishbullet/deoplete-ruby'
 Bundle 'ryanoasis/vim-webdevicons'
 Bundle 'numkil/ag.nvim'
+Bundle 'mattn/emmet-vim'
 
 
 
@@ -81,8 +78,6 @@ let g:ctrlp_map = '<c-p>'
 let g:deoplete#enable_at_startup = 1
 
 set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/converage/*,*/doc/*,*/.DS_Store,*/vendor
-"set guifont=ProggyCleanTT\ 12
-"set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h20 "ProggyCleanTT\ 12
 set guifont=Monaco\ for\ Powerline:h12
 
 syntax on
@@ -91,15 +86,9 @@ syntax enable
 filetype plugin on
 filetype indent on
 
-"autocmd vimenter * NERDTree
-
 autocmd Filetype html setlocal ts=2 sts=2 sw=2
 autocmd Filetype ruby,eruby setlocal ts=2 sts=2 sw=2
 autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
-
-"autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-"autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-"autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
 set laststatus=2
 set noshowmode
@@ -112,11 +101,6 @@ nmap <Leader>r :RuboCop<CR>
 
 " bind K to grep word under cursor
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-"endtry
-
-"let g:ctrlp_custom_ignore = 'vendor'
-
 
 map <c-b> :CtrlPBuffer<cr>
 map <leader>m :Rmodel<cr>
@@ -147,6 +131,12 @@ let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 let g:ruby_debugger_progname = 'mvim'
 
+let g:user_emmet_mode='n'    "only enable normal mode functions.
+let g:user_emmet_mode='inv'  "enable all functions, which is equal to
+let g:user_emmet_mode='a'    "enable all function in all mode.
+let g:user_emmet_install_global = 0
+
+autocmd FileType html,css EmmetInstall
 
 :nnoremap <leader>rap  :RAddParameter<cr>
 :nnoremap <leader>rcpc :RConvertPostConditional<cr>
@@ -184,22 +174,10 @@ let g:tmuxline_preset = {
       \'cwin' : ['#I', '#W', '#F'],
       \'y'    : ['%R', '%a', '%Y'],
       \'z'    : '#H'}
-"set rtp+=/usr/local/lib/python3.7/site-packages/powerline/bindings/vim
 
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
-
-
-"let g:ctrlp_buffer_func = { 'enter': 'BrightHighlightOn', 'exit':  'BrightHighlightOff', }
-
-"function BrightHighlightOn()
- " hi CursorLine guibg=darkred
-"endfunction
-
-"function BrightHighlightOff()
-"  hi CursorLine guibg=#191919
-"endfunction
 
 " The Silver Searcher
 if executable('ag')
@@ -217,24 +195,9 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#left_alt_sep = '|'
-"let g:airline_left_sep          = '▶'
-"let g:airline_left_alt_sep      = '»'
-"let g:airline_right_sep         = '◀'
-"let g:airline_right_alt_sep     = '«'
-"let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
-"let g:airline#extensions#readonly#symbol   = '⊘'
-"let g:airline#extensions#linecolumn#prefix = '¶'
-"let g:airline#extensions#paste#symbol      = 'ρ'
-"let g:airline_symbols.linenr    = '␊'
-"let g:airline_symbols.branch    = '⎇'
-"let g:airline_symbols.paste     = 'ρ'
-"let g:airline_symbols.paste     = 'Þ'
-"let g:airline_symbols.paste     = '∥'
-"let g:airline_symbols.whitespace = 'Ξ'
-"
-"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
