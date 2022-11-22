@@ -67,6 +67,7 @@ Bundle 'fishbullet/deoplete-ruby'
 Bundle 'ryanoasis/vim-webdevicons'
 Bundle 'numkil/ag.nvim'
 Bundle 'mattn/emmet-vim'
+Bundle 'thoughtbot/vim-rspec'
 
 
 
@@ -117,6 +118,12 @@ map <leader>n :NERDTreeToggle<cr>
 map <F7>  :call g:RubyDebugger.step()<CR>
 map <F5>  :call g:RubyDebugger.next()<CR>
 map <F8>  :call g:RubyDebugger.continue()<CR>
+
+
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
 map <Left> <Nop>
 map <Right> <Nop>
