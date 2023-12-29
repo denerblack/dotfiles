@@ -17,7 +17,7 @@ set softtabstop=2
 set expandtab
 
 filetype off
-set rtp+=~/.config/nvim/bundle/vundle/
+set rtp+=~/.config/nvim/bundle/
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
@@ -37,7 +37,7 @@ Bundle 'mattn/webapi-vim'
 Bundle 'mattn/gist-vim'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
+Bundle 'garbas/vim-snipmate'
 Bundle "honza/vim-snippets"
 Bundle "bonsaiben/bootstrap-snippets"
 Bundle "benmills/vimux"
@@ -55,6 +55,9 @@ Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 " Bundle 'wakatime/vim-wakatime'
 Bundle 'junegunn/vim-easy-align'
+Bundle 'crivotz/nv-ide'
+Bundle 'kdheepak/lazygit.nvim'
+Bundle 'nvim-treesitter/nvim-treesitter'
 
 " Make sure you use single quotes
 function! DoRemote(arg)
@@ -68,8 +71,13 @@ Bundle 'ryanoasis/vim-webdevicons'
 Bundle 'numkil/ag.nvim'
 Bundle 'mattn/emmet-vim'
 Bundle 'thoughtbot/vim-rspec'
+Bundle 'jghauser/mkdir.nvim'
+Bundle 'otavioschwanck/mood-nvim'
+Bundle 'nvim-lua/plenary.nvim'
+Bundle 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
+Bundle 'rest-nvim/rest.nvim'
 
-
+let g:snipMate = { 'snippet_version' : 1 }
 
 set clipboard=unnamedplus
 
@@ -125,10 +133,14 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
+map <Leader>gg :LazyGit <CR>
+
 map <Left> <Nop>
 map <Right> <Nop>
 map <Up> <Nop>
 map <Down> <Nop>
+
+nmap <F9> <Plug>RestNvim
 
 let g:multi_cursor_use_default_mapping=0
 
@@ -225,6 +237,12 @@ call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
-let g:python2_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+let g:python2_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
 let g:powerline_pycmd = 'py3'
