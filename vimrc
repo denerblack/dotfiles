@@ -1,97 +1,105 @@
 set nocompatible
-set encoding=utf-8
-set fileencoding=utf-8
-set number
-set t_Co=256
-set laststatus=2
-
 highlight LineNr ctermfg=240
 "ctermfg=237
 "ctermbg=234
 highlight Pmenu ctermbg=234 guibg=black ctermfg=237
 highlight PmenuSel ctermfg=7 ctermbg=4 guibg=#555555 guifg=#ffffff
 
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
+highlight TabLineSel guibg=#ff0000 guifg=#ffffff
 
-filetype off
-set rtp+=~/.config/nvim/bundle/
-call vundle#rc()
+set foldmethod=indent  " Fold based on indent level 
+set foldlevelstart=99  " Open all folds by default
+set foldnestmax=3      " Limit folding to 3 levels
+set foldenable         " Enable folding
 
-Bundle 'gmarik/vundle'
-Bundle 'vim-scripts/L9'
-Bundle 'ctrlpvim/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-bundler'
-Bundle 'tpope/vim-tbone'
-Bundle 'tpope/vim-rails'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'vim-ruby/vim-ruby'
-Bundle 'tpope/vim-fugitive'
-Bundle 'ecomba/vim-ruby-refactoring'
-Bundle 'edkolev/promptline.vim'
-Bundle 'itchyny/lightline.vim'
-Bundle 'mattn/webapi-vim'
-Bundle 'mattn/gist-vim'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle 'garbas/vim-snipmate'
-Bundle "honza/vim-snippets"
-Bundle "bonsaiben/bootstrap-snippets"
-Bundle "benmills/vimux"
-Bundle "Lokaltog/vim-easymotion"
-Bundle "terryma/vim-multiple-cursors"
-Bundle "tmhedberg/matchit"
-Bundle "tpope/vim-surround"
-Bundle "nelstrom/vim-visual-star-search"
-Bundle "scrooloose/nerdtree"
-Bundle "ngmy/vim-rubocop"
-Bundle "tpope/vim-jdaddy"
-Bundle "airblade/vim-gitgutter"
-Bundle "tmux-plugins/vim-tmux"
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-" Bundle 'wakatime/vim-wakatime'
-Bundle 'junegunn/vim-easy-align'
-Bundle 'crivotz/nv-ide'
-Bundle 'kdheepak/lazygit.nvim'
-Bundle 'nvim-treesitter/nvim-treesitter'
+set number " Show line numbers
+set t_Co=256 " Support 256 colors
+set laststatus=2 " Always show status line
+"set tabstop=2 " Number of spaces tabs count for
+"set shiftwidth=2 " Number of spaces to use for autoindent
+"set softtabstop=2 " Number of spaces for tab key
 
-" Make sure you use single quotes
-function! DoRemote(arg)
-  UpdateRemotePlugins
-endfunction
-Bundle 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Bundle 'roxma/nvim-yarp'
-Bundle 'roxma/vim-hug-neovim-rpc'
-Bundle 'fishbullet/deoplete-ruby'
-Bundle 'ryanoasis/vim-webdevicons'
-Bundle 'numkil/ag.nvim'
-Bundle 'mattn/emmet-vim'
-Bundle 'thoughtbot/vim-rspec'
-Bundle 'jghauser/mkdir.nvim'
-Bundle 'otavioschwanck/mood-nvim'
-Bundle 'nvim-lua/plenary.nvim'
-Bundle 'nvim-telescope/telescope.nvim', { 'tag': '0.1.2' }
-Bundle 'rest-nvim/rest.nvim'
+filetype off                  " Required
 
-let g:snipMate = { 'snippet_version' : 1 }
+call plug#begin('~/.vim/plugged')
 
-set clipboard=unnamedplus
+" General Plugins
+Plug 'tpope/vim-sensible' " Sensible defaults for Vim
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " Fuzzy file finder
+Plug 'junegunn/fzf.vim' " FZF integration for Vim
 
-let mapleader = "\\"
-let g:ctrlp_map = '<c-p>'
+" Syntax Highlighting and Code Navigation
+Plug 'sheerun/vim-polyglot' " Language pack for Vim
+Plug 'preservim/nerdtree' " File system explorer
+Plug 'Xuyuanp/nerdtree-git-plugin' " Git integration for NERDTree
+Plug 'majutsushi/tagbar' " Display tags of the current file
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Treesitter for better syntax highlighting
+Plug 'vim-ruby/vim-ruby' " Ruby syntax highlighting
+Plug 'tree-sitter/tree-sitter-ruby' " Ruby syntax highlighting
+Plug 'nanotech/jellybeans.vim'
 
-let g:deoplete#enable_at_startup = 1
+" Git Integration
+Plug 'tpope/vim-fugitive' " Git wrapper for Vim
+Plug 'airblade/vim-gitgutter' " Git diff in the gutter
+Plug 'kdheepak/lazygit.nvim' " Lazygit integration
 
-set wildignore+=*/.git/*,*/log/*,*/tmp/*,*/converage/*,*/doc/*,*/.DS_Store,*/vendor
-set guifont=Monaco\ for\ Powerline:h12
+" Code Completion and Snippets
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intellisense engine
+Plug 'honza/vim-snippets' " Snippets for various languages
+
+" Status Line and Aesthetics
+Plug 'vim-airline/vim-airline' " Lean & mean status/tabline
+Plug 'vim-airline/vim-airline-themes' " Themes for vim-airline
+Plug 'ryanoasis/vim-devicons' " Icons for various plugins
+
+" JSON Support
+Plug 'tpope/vim-jdaddy' " JSON manipulation
+
+" Additional Utilities
+Plug 'junegunn/vim-easy-align' " Easy text alignment
+Plug 'tpope/vim-surround' " Surround text objects easily
+Plug 'terryma/vim-multiple-cursors' " Multiple cursors support
+Plug 'easymotion/vim-easymotion' " Easy motion for quick navigation
+Plug 'nvim-lua/plenary.nvim' " Lua functions for Neovim
+Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder over lists
+Plug 'nvim-neotest/nvim-nio' " File explorer for Neovim
+Plug 'rest-nvim/rest.nvim' " REST client for Neovim
+Plug 'jghauser/mkdir.nvim' " Automatically create missing directories
+Plug 'antoinemadec/FixCursorHold.nvim' " Fix CursorHold performance issue
+Plug 'ngmy/vim-rubocop' " Rubocop integration for Vim
+Plug 'sheerun/vim-polyglot'
+
+" Copilot Plugin
+Plug 'github/copilot.vim' " Copilot for Vim
+
+" Copilot Chat Plugin
+Plug 'zbirenbaum/copilot.lua'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+
+Plug 'MunifTanjim/nui.nvim'
+Plug 'wthollingsworth/pomodoro.nvim'
+
+call plug#end()
+:lua << EOF
+require("copilot").setup {}
+require("CopilotChat").setup {}
+require('telescope').setup{
+defaults = {
+    mappings = {
+        i = {
+            ["<C-h>"] = "which_key"
+            }
+        }
+    },
+}
+EOF
+
 
 syntax on
-
-syntax enable
+syntax enable 
+set smartindent
+set autoindent
 filetype plugin on
 filetype indent on
 
@@ -102,127 +110,101 @@ autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 set laststatus=2
 set noshowmode
 set backspace=2
-let g:airline_theme='ubaryd'
+
+" General Settings
+set number " Show line numbers
+set relativenumber " Show relative line numbers
+set tabstop=4 " Number of spaces tabs count for
+set shiftwidth=4 " Number of spaces to use for autoindent
+set expandtab " Use spaces instead of tabs
+set smartindent " Smart autoindenting on new lines
+set wrap " Wrap long lines
+set cursorline " Highlight the current line
+set clipboard=unnamedplus " Use system clipboard
+set mouse=a " Enable mouse support
+
+" Key Mappings
+nnoremap <C-n> :NERDTreeToggle<CR> " Toggle NERDTree
+nnoremap <C-p> :Files<CR>
+nnoremap <C-b> :Buffers<CR>
+nnoremap <F8> :TagbarToggle<CR> " Toggle Tagbar
+
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" Open vimrc with <lead>v
+nnoremap <leader>v :edit ~/.config/nvim/init.vim <CR>
+" Reload vimrc with <lead>sv
+nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>a :edit ~/.config/alacritty/alacritty.toml<CR>
+nnoremap <leader>t :edit ~/.config/tmux/tmux.conf<CR>
+
+nnoremap <leader>- :split<CR>
+nnoremap <leader>\| :vsplit<CR>
+
+
+" EasyAlign configuration
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+
+" Custom alignment rules
+nmap <leader>a= :EasyAlign=<CR>
+" Enable the airline plugin
 let g:airline#extensions#tabline#enabled = 1
-let g:html5_event_handler_attributes_complete=0
-let g:vimrubocop_keymap = 0
-nmap <Leader>r :RuboCop<CR>
 
-" bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" Set the colors for the buffer tabs
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_powerline_fonts = 1 " Enable Powerline fonts
+let g:airline_theme='minimalist'
 
-map <c-b> :CtrlPBuffer<cr>
-map <leader>m :Rmodel<cr>
-map <leader>c :Rcontroller<cr>
-map <leader>v :Rview<cr>
 
+
+" Customize the colors (example)
+highlight AirlineTabFill guibg=#282c34 guifg=#abb2bf
+highlight AirlineTab guibg=#3e4451 guifg=#abb2bf
+highlight AirlineTabSel guibg=#61afef guifg=#282c34
+
+" CoC Configuration
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-python']
+
+" GitGutter Configuration
+let g:gitgutter_enabled = 1
+
+" Enable Copilot
+let g:copilot_no_tab_map = v:false
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+
+let mapleader = "\\"
+
+" Initialize configuration dictionary
+let g:fzf_vim = {}
+let g:fzf_vim.buffers_jump = 1
+
+
+" EasyAlign Configuration
 nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 map  / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 map  n <Plug>(easymotion-next)
 map  N <Plug>(easymotion-prev)
-map <leader>n :NERDTreeToggle<cr>
-map <F7>  :call g:RubyDebugger.step()<CR>
-map <F5>  :call g:RubyDebugger.next()<CR>
-map <F8>  :call g:RubyDebugger.continue()<CR>
 
+let g:vimrubocop_keymap = 0
+nmap <Leader>r :RuboCop<CR>
 
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-
-map <Leader>gg :LazyGit <CR>
-
-map <Left> <Nop>
-map <Right> <Nop>
-map <Up> <Nop>
-map <Down> <Nop>
-
-nmap <F9> <Plug>RestNvim
-
-let g:multi_cursor_use_default_mapping=0
-
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<Esc>'
-let g:ruby_debugger_progname = 'mvim'
-
-let g:user_emmet_mode='n'    "only enable normal mode functions.
-let g:user_emmet_mode='inv'  "enable all functions, which is equal to
-let g:user_emmet_mode='a'    "enable all function in all mode.
-let g:user_emmet_install_global = 0
-
-autocmd FileType html,css EmmetInstall
-
-:nnoremap <leader>rap  :RAddParameter<cr>
-:nnoremap <leader>rcpc :RConvertPostConditional<cr>
-:nnoremap <leader>rel  :RExtractLet<cr>
-:vnoremap <leader>rec  :RExtractConstant<cr>
-:vnoremap <leader>relv :RExtractLocalVariable<cr>
-:nnoremap <leader>rit  :RInlineTemp<cr>
-:vnoremap <leader>rrlv :RRenameLocalVariable<cr>
-:vnoremap <leader>rriv :RRenameInstanceVariable<cr>
-:vnoremap <leader>rem  :RExtractMethod<cr>
-
-" Start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-"
-" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" Strip trailing whitespace
-function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
-
-let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#I', '#W', '#F'],
-      \'y'    : ['%R', '%a', '%Y'],
-      \'z'    : '#H'}
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-" The Silver Searcher
-if executable('ag')
-	" Use ag over grep
-	set grepprg=ag\ --nogroup\ --nocolor
-
-	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-	" ag is fast enough that CtrlP doesn't need to cache
-	let g:ctrlp_use_caching = 0
-endif
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-
-" NERDTress File highlighting
+" NERDTree Configuration
+" Highlight files with specific extensions
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
- exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+    exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+    exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 
+
+map <leader>n :NERDTreeToggle<cr>
 call NERDTreeHighlightFile('jade', 'green', 'none', 'green', '#151515')
 call NERDTreeHighlightFile('ini', 'yellow', 'none', 'yellow', '#151515')
 call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
@@ -237,12 +219,23 @@ call NERDTreeHighlightFile('coffee', 'Red', 'none', 'red', '#151515')
 call NERDTreeHighlightFile('js', 'Red', 'none', '#ffa500', '#151515')
 call NERDTreeHighlightFile('php', 'Magenta', 'none', '#ff00ff', '#151515')
 
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+"hi NERDTreeDir guifg=#FF0000 ctermfg=white
+"hi NERDTreeFlags guifg=#FF0000 ctermfg=grey
 
-let g:python2_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
-let g:powerline_pycmd = 'py3'
+
+let g:loaded_perl_provider = 0
+let g:ruby_host_prog = 'rvm system do neovim-ruby-host'
+
+colorscheme jellybeans 
+set termguicolors
+
+" You might have to force true color when using regular vim inside tmux as the
+" colorscheme can appear to be grayscale with "termguicolors" option enabled.
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+set tabstop=2 " Number of spaces tabs count for
+set shiftwidth=2 " Number of spaces to use for autoindent
+set softtabstop=2 " Number of spaces for tab key
